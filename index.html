@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yang Chen</title>
+<meta name="description" content="Yang Chen - PhD student at Nanjing University, working on flow matching and computer vision." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --text: #201729;
+    --muted: #6f6578;
+    --faint: #9b91a6;
+    --line: #e4ddec;
+    --paper: #fbf9fd;
+    --wash: #f1ebf8;
+    --accent: #4d0099;
+    --accent-dark: #2e005c;
+    --accent-soft: #efe4fb;
+    --serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--text);
+    background:
+      linear-gradient(90deg, rgba(77, 0, 153, .075), transparent 25rem),
+      linear-gradient(180deg, rgba(255, 255, 255, .72), transparent 18rem),
+      var(--paper);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(77, 0, 153, .25);
+  }
+
+  a:hover {
+    color: var(--accent-dark);
+    border-bottom-color: currentColor;
+  }
+
+  .page {
+    width: min(1080px, calc(100% - 48px));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 284px 1fr;
+    gap: 64px;
+    padding: 58px 0 72px;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 38px;
+    align-self: start;
+  }
+
+  .portrait {
+    width: 216px;
+    height: 258px;
+    display: block;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(145deg, rgba(77, 0, 153, .14), rgba(30, 23, 41, .04)),
+      var(--wash);
+    margin-bottom: 24px;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-size: 43px;
+    line-height: .95;
+    font-weight: 650;
+    margin: 0;
+  }
+
+  .name-zh {
+    font-family: var(--serif);
+    font-size: 23px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .role {
+    color: var(--muted);
+    margin: 18px 0 0;
+    max-width: 250px;
+  }
+
+  .links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 16px;
+    margin: 24px 0 0;
+    max-width: 236px;
+  }
+
+  .links a {
+    width: fit-content;
+    color: var(--text);
+    border-bottom-color: var(--line);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .02em;
+  }
+
+  .links a:hover { color: var(--accent); }
+
+  .availability {
+    margin: 18px 0 0;
+    max-width: 250px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+    font-weight: 700;
+  }
+
+  .availability strong {
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  .availability a {
+    color: var(--text);
+    border-bottom-color: rgba(77, 0, 153, .32);
+  }
+
+  .sidebar-note {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--faint);
+    font-size: 13px;
+  }
+
+  .topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+  }
+
+  .tagline {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+  }
+
+  nav {
+    display: flex;
+    gap: 22px;
+  }
+
+  nav a {
+    color: var(--muted);
+    border: 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  .lead {
+    font-family: var(--serif);
+    font-size: 29px;
+    line-height: 1.18;
+    margin: 0 0 18px;
+    max-width: 720px;
+  }
+
+  .lead strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .intro-text {
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 0 14px;
+  }
+
+  section {
+    padding: 34px 0 0;
+    margin-top: 4px;
+    scroll-margin-top: 28px;
+  }
+
+  .topline + section {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+
+  h2::after {
+    content: "";
+    height: 1px;
+    background: var(--line);
+    flex: 1;
+  }
+
+  .interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 20px;
+  }
+
+  .interests span {
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .publication {
+    display: grid;
+    grid-template-columns: 84px 112px 1fr;
+    gap: 18px;
+    padding: 17px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .publication:first-of-type { border-top: 0; padding-top: 0; }
+
+  .venue {
+    padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .venue b {
+    display: block;
+    color: var(--accent);
+    font-size: 13px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: .02em;
+  }
+
+  .venue i {
+    display: block;
+    color: var(--faint);
+    font-style: normal;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .paper-thumb {
+    width: 112px;
+    height: 76px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .02);
+    overflow: hidden;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+  }
+
+  .paper-title {
+    font-family: var(--serif);
+    color: var(--text);
+    font-size: 22px;
+    line-height: 1.18;
+    font-weight: 650;
+    border-bottom: 0;
+  }
+
+  .paper-title:hover { color: var(--accent); }
+
+  .authors {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .authors .me {
+    color: var(--text);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(77, 0, 153, .32);
+  }
+
+  .paper-links {
+    display: flex;
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  .paper-links a {
+    color: var(--muted);
+    border-bottom-color: var(--line);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  .paper-links a:hover { color: var(--accent); }
+
+  .more {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 16px 0 0;
+  }
+
+  .cv-list {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .cv-item {
+    display: grid;
+    grid-template-columns: 52px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .org-logo {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    display: block;
+    object-fit: contain;
+    background: var(--wash);
+    padding: 2px;
+    border-radius: 50%;
+  }
+
+  .org-logo.mark {
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    padding: 0;
+    color: var(--accent);
+    font-weight: 800;
+    letter-spacing: .04em;
+  }
+
+  .cv-item h3 {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.2;
+    font-weight: 650;
+    margin: 0;
+  }
+
+  .cv-item p {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .awards {
+    margin: 7px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+
+  .awards li { margin-top: 2px; }
+
+  .awards time {
+    color: var(--faint);
+    display: inline-block;
+    min-width: 74px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .awards b {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .cv-item time {
+    color: var(--faint);
+    font-size: 14px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--faint);
+    font-size: 13px;
+  }
+
+  @media (max-width: 860px) {
+    .page {
+      grid-template-columns: 1fr;
+      gap: 34px;
+      padding-top: 34px;
+    }
+
+    .sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 22px;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 26px;
+    }
+
+    .portrait {
+      width: 132px;
+      height: 158px;
+      margin-bottom: 0;
+    }
+
+    .name { font-size: 38px; }
+    .role { max-width: none; }
+    .sidebar-note { display: none; }
+    .topline { display: none; }
+  }
+
+  @media (max-width: 560px) {
+    .page {
+      width: min(100% - 32px, 1080px);
+      padding-top: 24px;
+    }
+
+    .sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait {
+      width: 136px;
+      height: 164px;
+    }
+
+    .lead { font-size: 25px; }
+
+    .publication,
+    .cv-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .paper-thumb {
+      width: 100%;
+      height: 64px;
+    }
+
+    .org-logo { margin-bottom: 4px; }
+
+    .cv-item time { order: -1; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <aside class="sidebar">
+    <img class="portrait" src="assets/profile.jpg" alt="Portrait of Yang Chen" />
+    <div>
+      <h1 class="name">Yang Chen</h1>
+      <div class="name-zh">陈阳</div>
+      <p class="role">
+        PhD Student<br />
+        Nanjing University
+      </p>
+      <div class="links">
+        <a href="mailto:yang-chen@smail.nju.edu.cn">Email</a>
+        <a href="https://scholar.google.com/citations?user=GeuLW3EAAAAJ&hl=zh-CN&oi=sra" target="_blank" rel="noopener">Scholar</a>
+        <a href="https://github.com/Y-Sisyphus" target="_blank" rel="noopener">GitHub</a>
+        <a href="#publications">Papers</a>
+      </div>
+      <p class="availability">
+        Open to <strong>internship</strong> opportunities. Please <a href="mailto:yang-chen@smail.nju.edu.cn">email me</a>.
+      </p>
+      <p class="sidebar-note">
+        Working on data-efficient visual learning and scalable generative models.
+      </p>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topline">
+      <div class="tagline">Flow Matching / Computer Vision</div>
+      <nav>
+        <a href="#research">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+      </nav>
+    </div>
+
+    <section id="research">
+      <p class="lead">
+        I work on <strong>generative models</strong> and data-efficient visual learning.
+      </p>
+      <p class="intro-text">
+        I am a PhD student in the School of Computer Science at Nanjing University, advised by <a href="https://wanglimin.github.io/" target="_blank" rel="noopener">Prof. Limin Wang</a>. My research focuses on flow matching, computer vision, and scalable generation systems.
+      </p>
+      <p class="intro-text">
+        I received my bachelor's degree from Kuang Yaming Honors School, Nanjing University. My recent work studies normalizing flows, masked image modeling, and unified multimodal understanding and generation.
+      </p>
+      <div class="interests">
+        <span>Flow Matching</span>
+        <span>Computer Vision</span>
+        <span>Generative Models</span>
+        <span>Video Understanding</span>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="cv-list">
+        <div class="cv-item">
+          <img class="org-logo" src="assets/logos/nju.png" alt="Nanjing University emblem" />
+          <div>
+            <h3>Nanjing University</h3>
+            <p>Ph.D. student, School of Computer Science, advised by Prof. Limin Wang</p>
+            <ul class="awards">
+              <li><time>Research</time><b>Flow Matching</b>, computer vision, generative modeling</li>
+            </ul>
+          </div>
+          <time>2023.09 - Present</time>
+        </div>
+        <div class="cv-item">
+          <img class="org-logo" src="assets/logos/nju.png" alt="Nanjing University emblem" />
+          <div>
+            <h3>Nanjing University</h3>
+            <p>Bachelor's degree, Kuang Yaming Honors School</p>
+            <ul class="awards">
+              <li><time>Honors</time><b>Interdisciplinary honors education</b> at Kuang Yaming Honors School</li>
+            </ul>
+          </div>
+          <time>2019.09 - 2023.06</time>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="cv-list">
+        <div class="cv-item">
+          <img class="org-logo mark" src="assets/logos/tencent-color.svg" alt="Tencent logo" />
+          <div><h3>Tencent Hunyuan</h3><p>Research Intern · vision generation, video mining</p></div>
+          <time>2026.04 - Present</time>
+        </div>
+        <div class="cv-item">
+          <img class="org-logo mark" src="assets/logos/alibaba.svg" alt="Alibaba logo" />
+          <div><h3>Alibaba Alimama</h3><p>Research Intern · image generation, diffusion step distillation</p></div>
+          <time>2025.03 - 2026.04</time>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2>Selected Publications</h2>
+
+      <article class="publication">
+        <div class="venue"><b>ECCV</b><i>2026</i></div>
+        <img class="paper-thumb" src="https://cdn-thumbnails.huggingface.co/social-thumbnails/papers/2606.26016.png" alt="MIMFlow paper thumbnail" loading="lazy" />
+        <div>
+          <a class="paper-title" href="https://arxiv.org/abs/2606.26016" target="_blank" rel="noopener">MIMFlow: Integrating Masked Image Modeling with Normalizing Flows for End-to-End Image Generation</a>
+          <p class="authors"><span class="me">Yang Chen</span>, X. Xu, S. Wang, X. Zhang, Q. Guo, T. Ge, L. Wang</p>
+          <div class="paper-links"><a href="https://arxiv.org/abs/2606.26016" target="_blank" rel="noopener">arXiv</a><a href="https://github.com/MCG-NJU/MIMFlow" target="_blank" rel="noopener">GitHub</a></div>
+        </div>
+      </article>
+
+      <article class="publication">
+        <div class="venue"><b>ECCV</b><i>2026</i></div>
+        <img class="paper-thumb" src="https://cdn-thumbnails.huggingface.co/social-thumbnails/papers/2606.16255.png" alt="UniDDT paper thumbnail" loading="lazy" />
+        <div>
+          <a class="paper-title" href="https://arxiv.org/abs/2606.16255" target="_blank" rel="noopener">UniDDT: Unifying Multimodal Understanding and Generation with Decoupled Diffusion Transformer</a>
+          <p class="authors">S. Wang, L. Li, <span class="me">Yang Chen</span>, R. Gao, Y. Teng, L. Wang</p>
+          <div class="paper-links"><a href="https://arxiv.org/abs/2606.16255" target="_blank" rel="noopener">arXiv</a><a href="https://scholar.google.com/citations?user=GeuLW3EAAAAJ&hl=zh-CN&oi=sra" target="_blank" rel="noopener">GitHub TBA</a></div>
+        </div>
+      </article>
+
+      <article class="publication">
+        <div class="venue"><b>AAAI</b><i>2026</i></div>
+        <img class="paper-thumb" src="https://cdn-thumbnails.huggingface.co/social-thumbnails/papers/2511.22345.png" alt="Flowing Backwards paper thumbnail" loading="lazy" />
+        <div>
+          <a class="paper-title" href="https://arxiv.org/abs/2511.22345" target="_blank" rel="noopener">Flowing Backwards: Improving Normalizing Flows via Reverse Representation Alignment</a>
+          <p class="authors"><span class="me">Yang Chen</span>, X. Xu, S. Wang, C. Zhu, R. Wen, X. Li, T. Ge, L. Wang</p>
+          <div class="paper-links"><a href="https://arxiv.org/abs/2511.22345" target="_blank" rel="noopener">arXiv</a><a href="https://github.com/MCG-NJU/FlowBack" target="_blank" rel="noopener">GitHub</a></div>
+        </div>
+      </article>
+
+      <article class="publication">
+        <div class="venue"><b>arXiv</b><i>2024</i></div>
+        <img class="paper-thumb" src="https://cdn-thumbnails.huggingface.co/social-thumbnails/papers/2412.21197.png" alt="Video Action Dataset Condensation paper thumbnail" loading="lazy" />
+        <div>
+          <a class="paper-title" href="https://arxiv.org/abs/2412.21197" target="_blank" rel="noopener">A Large-Scale Study on Video Action Dataset Condensation</a>
+          <p class="authors"><span class="me">Yang Chen</span>, S. Guo, B. Zheng, L. Wang</p>
+          <div class="paper-links"><a href="https://arxiv.org/abs/2412.21197" target="_blank" rel="noopener">arXiv</a><a href="https://github.com/MCG-NJU/Video-DC" target="_blank" rel="noopener">GitHub</a></div>
+        </div>
+      </article>
+
+      <!-- <p class="more">
+        Citation profile: 9 citations, h-index 2 on Google Scholar as of June 2026.
+        <a href="https://scholar.google.com/citations?user=GeuLW3EAAAAJ&hl=zh-CN&oi=sra" target="_blank" rel="noopener">Full list on Google Scholar</a>.
+      </p> -->
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Yang Chen. Last updated 2026.</p>
+    </footer>
+  </div>
+</main>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
